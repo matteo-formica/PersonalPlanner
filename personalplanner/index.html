@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/styles.css" id="themeLink">
+    <title>Personal Planner</title>
+</head>
+<body>
+    <header>
+        <div>
+        <h1>Personal Planner</h1>
+        <p>By Matteo Formica</p>
+        </div>
+        <div id="themeSelector">
+            <button class="themeSelectorBtn on" id="lightModeBtn">☀️</button>
+            <button class="themeSelectorBtn" id="darkModeBtn">🌕</button>
+        </div>
+    </header>
+    <main>
+        <section class="appPage" id="dashboardPage">
+            <h2 class="pageTitle">Dashboard</h2>
+            <div class="dashboardCards">
+                <div class="dashboardCard" id="weatherCard">
+                    <h5>Weather(current location)</h5>
+                    <div id="meteoHeader">
+                        <h4 id="dashboardMeteoLocation">Imperia</h4>
+                        <img src="" alt="meteoIcon" id="dashboardMeteoIcon">
+                        <h5 id="dashCurrentTemp"></h5>
+                    </div>
+                    </div>
+            <div class="dashboardCard tasksPrev" id="tasksCard">
+                <h5>Tasks</h5>
+                <ul class="toDoList" id="toDoListPrev">
+                    
+                </ul>
+                
+            </div>
+            <div class="dashboardCard" id="calendarCard">
+                <h5>Calendar</h5>
+                <h3>Coming Soon</h3></div>
+            <div class="dashboardCard" id="diaryCard">
+                <h5>Diary</h5>
+                <h3>Coming Soon</h3>
+                </div>    
+            </div>
+        </section>
+        <section class="appPage off" id="tasksPage">
+            <h2 class="pageTitle">Tasks</h2>
+            <div class="pageCard tasksView" id="tasksView">
+                <ul class="toDoList" id="toDoList">
+                    
+                </ul>
+                <button id="taskFormOpenBtn">Add</button>
+            </div>
+            <div class="addTaskContainer off" id="addTaskContainer">
+                <button id="closeForm">X</button>
+                <form id="addTaskForm">
+                    <input type="text" maxlength="20" id="toDoInput" name="toDoInput" placeholder="Task Name" required>
+                    <button type="submit" id="submitToDo">Add Task</button>
+                </form>
+            </div>
+        </section>
+        <section class="appPage off" id="calendarPage">
+            <h2 class="pageTitle">Calendar</h2>
+            <p>View your calendar here.</p>
+            <h3>Coming Soon</h3>
+        </section>
+        <section class="appPage off" id="meteoPage">
+            <h2 class="pageTitle">Meteo</h2>
+            <div class="pageCard" id="meteoView">
+                <form action="submit" id="meteoSearch">
+                    <input type="text" id="cityName" placeholder="City name">
+                    <button id="meteoSearchBtn">Search</button>
+                </form>
+                <div id="meteoHeader">
+                    <h4 id="currentLocation"></h4>
+                    <img class="off" src="" alt="meteoIcon" id="nowIcon">
+                    <h5 id="currentTemp"></h5>
+                </div>
+                <div class="meteoCards">
+                    <div class="meteoCard" id="todayMeteo">
+                        <h5>Today</h5>
+                        <ul id="todayMeteoData">
+
+                        </ul>
+                    </div>
+                    <div class="meteoCard" id="tomorrowMeteo">
+                        <h5>Tomorrow</h5>
+                        <ul id="tomorrowMeteoData">
+
+                        </ul>
+                    </div>
+                    <div class="meteoCard" id="airQuality">
+                        <ul id="airMeteoData">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="fetchingMeteo off" id="fetchingMeteo">
+                <ul id="fetchingBanner"></ul>
+            </div>
+        </section>
+        <section class="appPage off" id="diaryPage">
+            <h2 class="pageTitle">Diary</h2>
+            <p>Write in your diary here.</p>
+            <h3>Coming Soon</h3>
+        </section>
+    </main>
+    <footer class="">
+        <div  class="navigation" id="navMenu">
+            <ul>
+                <li id="dashboard"><a class="icon">🏠</a><a class="label">Dashboard</a></li>
+                <li id="tasks"><a class="icon">📋</a><a class="label">Tasks</a></li>
+                <li id="calendar"><a class="icon">🗓️</a><a class="label">Calendar</a></li>
+                <li id="meteo"><a class="icon">🌦️</a><a class="label">Meteo</a></li>
+                <li id="diary"><a class="icon">📝</a><a class="label">Diary</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="/assets/javascript/script.js"></script>
+</body>
+</html>

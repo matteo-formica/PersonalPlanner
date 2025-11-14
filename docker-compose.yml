@@ -1,0 +1,17 @@
+
+services:
+  personalplanner:
+    image: nginx:latest
+    container_name: personalplanner
+    ports:
+      - "8080:80"
+    volumes:
+      - ./personalplanner:/usr/share/nginx/html:ro
+
+  api:
+    image: clue/json-server          # ⬅️ QUI il nome giusto
+    container_name: personalplanner-api
+    ports:
+      - "3000:80"                    # json-server espone 80 nel container
+    volumes:
+      - ./api/db.json:/data/db.json  # db.json sul tuo disco -> /data/db.json nel container
