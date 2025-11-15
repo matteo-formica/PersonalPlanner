@@ -144,6 +144,7 @@ async function delTask(id){
 const toDoList = document.getElementById('toDoList');
 const toDoListPrev = document.getElementById('toDoListPrev');
 const taskPage = document.getElementById('tasksPage');
+
 // Fetch Tasks and add EventListener for other functionalities
 // Display Tasks in Tasks page
 
@@ -243,7 +244,7 @@ taskForm.addEventListener('submit', function(event){
     toDoInput.value= "";
 });
 
-
+// Tasks logic end
 
 // MeteoPage Logic
 
@@ -264,14 +265,16 @@ const dashboardMeteoIcon = document.getElementById('dashboardMeteoIcon');
 const currentTemp = document.getElementById('currentTemp');
 const dashCurrentTemp = document.getElementById('dashCurrentTemp');
 
-    
+//Fetch meteo data   
 const fetchData = async function () {
         
         const startDate = new Date().toISOString().split('T')[0];
         const endDate = new Date();
         endDate.setDate(endDate.getDate() + 5);
         const endDateFormatted = endDate.toISOString().split('T')[0];
-        let searchedLocation = ""
+        let searchedLocation = "";
+
+        // I will add currentPosition logic here
         if(dashboardPage.classList.contains('off')){
             searchedLocation = String(locationName.value).charAt(0).toUpperCase() + String(locationName.value).slice(1);
             const fetchAlert = document.createElement('LI');
@@ -293,11 +296,15 @@ const fetchData = async function () {
             if(response.ok){
                 todayMeteoData.innerHTML= "";
                 tomorrowMeteoData.innerHTML= "";
+
                 if(dashboardPage.classList.contains('off')){
                     meteoView.classList.remove('blur');
                     fetchingMeteoAlert.classList.toggle('off');
                 }
                 currentLocation.innerText = searchedLocation;
+
+
+                // set meteo icon
                 if(meteoData.currentConditions.icon === "clear-night"){
                     meteoIcon.src ='assets/meteoIcon/clear-night.png';
                     dashboardMeteoIcon.src = 'assets/meteoIcon/clear-night.png'
@@ -323,6 +330,16 @@ const fetchData = async function () {
                     dashboardMeteoIcon.src = 'assets/meteoIcon/cloudy.png'
                     meteoIcon.classList.remove('off');
                 }
+                else if(meteoData.currentConditions.icon === "rain"){                   
+                    meteoIcon.src = 'assets/meteoIcon/rain.png';
+                    dashboardMeteoIcon.src = 'assets/meteoIcon/rain.png'
+                    meteoIcon.classList.remove('off');
+                }
+                else{
+                    meteoIcon.alt = "No icon found"
+                };
+                
+                // set current temperature 
                 dashCurrentTemp.innerText= `${meteoData.days[0].temp} F°`;
                 currentTemp.innerText= `${meteoData.days[0].temp} F°`;
 
@@ -339,6 +356,7 @@ const fetchData = async function () {
                 todayMeteo.append(todayCond, todayTemp, todayHum, todayPressure);
                 todayMeteo.style.fontSize = '12px';
 
+                // controls precipitation probability and add data 
                 if(meteoData.days[0].preciptype !== null){
                     const todayPrec = document.createElement('LI');
                     todayPrec.innerText = `${meteoData.days[0].preciptype} probability: ${meteoData.days[0].precipprob}%`;
@@ -387,7 +405,7 @@ meteoSearch.addEventListener('submit', function(e){
     meteoView.classList.remove('blur');
     });      
     
-
+// Meteo logic end
 
 // Additional functionalities can be added below
 
