@@ -190,6 +190,12 @@ main{
     
 }
 
+@media (max-width: 900px) {
+    .dashboardCard{
+        width: 90%;
+    }
+}
+
 .tasksPrev ul{
     display: flex;
     flex-direction: column;
@@ -376,8 +382,9 @@ main{
 .taskItem{
     display: flex;
     align-items: center;
-    min-height: 7vh;
+    min-height: 6vh;
     justify-content: space-between;
+    font-size: 0.8em;
 
 }
 
@@ -804,6 +811,11 @@ main{
     
 }
 
+.modifyDiaryPageForm div{
+    justify-self: center;
+    align-self: center;
+}
+
 .modifyDiaryPageForm button{
     margin-top: 0px;
     min-height: 4vh;
@@ -834,9 +846,7 @@ main{
     text-align: start;
 }
 
-#noPageAlert{
-    margin-bottom: 20em;
-}
+
 
 #diaryDisplay{
     display: flex;
@@ -900,6 +910,8 @@ main{
         max-height: 350px;
     }
 }
+
+
 
 @media (max-width: 620px) {
     #pageHeadText{

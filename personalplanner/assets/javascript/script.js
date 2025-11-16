@@ -462,6 +462,8 @@ const modifyPageText = document.getElementById('modifyPageText');
 const modifyDiaryPageBtn = document.getElementById('modifyDiaryPageBtn');
 const modifyDiaryPageWindow = document.getElementById('modifyDiaryPageWindow');
 const closeModifyDiaryForm = document.getElementById('closeModifyDiaryForm');
+const formDelPageBtn = document.getElementById('formDelPageBtn');
+
 
 // simple closing modify form
 closeModifyDiaryForm.addEventListener('click', function(){
@@ -473,8 +475,14 @@ closeModifyDiaryForm.addEventListener('click', function(){
 const actModifyPage = function(id, title, text, date){
     modifyPageTitle.value = title;
     modifyPageText.value = text;
+    formDelPageBtn.addEventListener('click', function(){
+        delPage(id);
+        modifyDiaryPageWindow.classList.add('off');
+        main.classList.remove('blur');
+    });
     modifyDiaryPageForm.addEventListener('submit', function(e){
         e.preventDefault();
+
         const newPageTitle = modifyPageTitle.value;
         const newPageText = modifyPageText.value;
         modifyPage(id, newPageTitle, newPageText, date);
@@ -525,6 +533,7 @@ async function retrieveDiary(){
                 pageItem.addEventListener('click', function(e){
                     modifyDiaryPageWindow.classList.toggle('off');
                     main.classList.toggle('blur');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     actModifyPage(page.id, page.title, page.text, page.date);
                     e.stopPropagation()
                 })
