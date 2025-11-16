@@ -6,10 +6,14 @@ const lightModeBtn = document.getElementById('lightModeBtn');
 const darkModeBtn = document.getElementById('darkModeBtn');
 const themeLink = document.getElementById('themeLink');
 const bodyBack= document.getElementById('body');
+const pageTitle = document.querySelectorAll('.pageTitle');
 
 lightModeBtn.onclick = function() {
     bodyBack.classList.add('light');
     bodyBack.classList.remove('dark');
+    pageTitle.forEach(function(title){
+        title.classList.remove('dark');
+    });
     lightModeBtn.classList.add('on');
     darkModeBtn.classList.remove('on');
 }
@@ -17,6 +21,9 @@ lightModeBtn.onclick = function() {
 darkModeBtn.onclick = function() {
     bodyBack.classList.remove('light');
     bodyBack.classList.add('dark');
+    pageTitle.forEach(function(title){
+        title.classList.add('dark');
+    });
     lightModeBtn.classList.remove('on');
     darkModeBtn.classList.add('on');
 }

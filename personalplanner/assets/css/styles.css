@@ -318,6 +318,10 @@ main{
     background-color: #2d2232e6;
 }
 
+.pageTitle.dark{
+    color: whitesmoke;
+}
+
 
 
 /* Tasks Page specific Style  */
