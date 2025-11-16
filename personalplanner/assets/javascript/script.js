@@ -40,6 +40,10 @@ const tasksPage = document.getElementById('tasksPage');
 const calendarPage = document.getElementById('calendarPage');
 const meteoPage = document.getElementById('meteoPage');
 const diaryPage = document.getElementById('diaryPage');
+const appName = document.getElementById('appName');
+const weatherCard = document.getElementById('weatherCard');
+const tasksCard = document.getElementById('tasksCard');
+
 
 dashboardBtn.onclick = function() {
     dashboardPage.classList.remove('off');
@@ -82,6 +86,35 @@ diaryBtn.onclick = function() {
     tasksPage.classList.add('off');
     calendarPage.classList.add('off');
     meteoPage.classList.add('off');
+}
+
+appName.onclick = function(){
+    if(dashboardPage.classList.contains('off')){
+        dashboardPage.classList.remove('off');
+        tasksPage.classList.add('off');
+        calendarPage.classList.add('off');
+        meteoPage.classList.add('off');
+        diaryPage.classList.add('off');
+        retrieveTasks();
+        fetchData();
+    }
+}
+
+weatherCard.onclick = function(){
+    meteoPage.classList.remove('off');
+    dashboardPage.classList.add('off');
+    tasksPage.classList.add('off');
+    calendarPage.classList.add('off');
+    diaryPage.classList.add('off');
+}
+
+tasksCard.onclick = function(){
+    tasksPage.classList.remove('off');
+    dashboardPage.classList.add('off');
+    calendarPage.classList.add('off');
+    meteoPage.classList.add('off');
+    diaryPage.classList.add('off');
+    retrieveTasks();
 }
 
 // End of navigation logic
