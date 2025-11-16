@@ -48,6 +48,7 @@ dashboardBtn.onclick = function() {
     meteoPage.classList.add('off');
     diaryPage.classList.add('off');
     retrieveTasks();
+    fetchData();
 }
 
 tasksBtn.onclick = function() {
@@ -147,7 +148,6 @@ async function modifyTask(id, newdescription, completed){
             })
         })
         if(response.ok){
-
             await retrieveTasks();
         }
         }
@@ -216,7 +216,6 @@ async function retrieveTasks(){
         }
         });
         const tasks = await response.json();
-        console.log(tasks);
         if(response.ok && tasks.length > 0){
             toDoListPrev.innerHTML = "";
             toDoList.innerHTML = "";
@@ -339,6 +338,7 @@ const meteoAlerts = document.getElementById('meteoAlerts');
 const fetchData = async function () {
         meteoAlerts.innerHTML= "";
         meteoAlerts.classList.add('off');
+        meteoIcon.src= "";
         const startDate = new Date().toISOString().split('T')[0];
         const endDate = new Date();
         endDate.setDate(endDate.getDate() + 5);
@@ -416,7 +416,6 @@ const fetchData = async function () {
 
                 // set meteo Alerts
                 if(meteoData.alerts.length !== 0){
-                    console.log(meteoData.alerts.length);
                     dashMeteoAlerts.classList.remove('off');
                     meteoAlerts.classList.remove('off');
                     dashMeteoAlerts.innerHTML= `${meteoData.alerts[0].event}`;
