@@ -35,16 +35,28 @@
                 <h5>Tasks</h5>
                 <ul class="toDoList" id="toDoListPrev">
                     
-                </ul>
-                
+                </ul>               
             </div>
             <div class="dashboardCard" id="calendarCard">
-                <h5>Calendar</h5>
+                <h5>News</h5>
                 <h3>Coming Soon</h3></div>
             <div class="dashboardCard" id="diaryCard">
-                <h5>Diary</h5>
-                <h3>Coming Soon</h3>
-                </div>    
+                <h5>Diary(Latest)</h5>
+                <div class="noPageAlert off" id="noPageDashAlert"></div>
+                <table class="diary" id="diaryPrev">
+                    <thead>
+                        <tr id="diaryPrevHead">
+                            <td>Title</td>
+                            <td>Text</td>
+                            <td>Date</td>
+                            <td>Delete</td>
+                        </tr>
+                    </thead>
+                    <tbody id="diaryPrevTableBody">
+
+                    </tbody>    
+                </table>
+            </div>    
             </div>
         </section>
         <section class="appPage off" id="tasksPage">
@@ -56,9 +68,9 @@
                 <button id="taskFormOpenBtn">Add</button>
             </div>
         </section>
-        <section class="appPage off" id="calendarPage">
-            <h2 class="pageTitle">Calendar</h2>
-            <p>View your calendar here.</p>
+        <section class="appPage off" id="newsPage">
+            <h2 class="pageTitle">News</h2>
+            <p>View latest news here.</p>
             <h3>Coming Soon</h3>
         </section>
         <section class="appPage off" id="meteoPage">
@@ -95,32 +107,63 @@
         </section>
         <section class="appPage off" id="diaryPage">
             <h2 class="pageTitle">Diary</h2>
-            <p>Write in your diary here.</p>
-            <h3>Coming Soon</h3>
+            <div class="pageCard diaryView" id="diaryView">
+                <div class="noPageAlert off" id="noPageAlert"></div>
+                <table class="diary" id="diaryDisplay">
+                    <thead>
+                        <tr id="diaryTableHead">
+                            <td id="pageHeadTitle">Title</td>
+                            <td id="pageHeadText">Text</td>
+                            <td>Date</td>
+                            <td id="pageHeadDel"></td>
+                        </tr>
+                    </thead>
+                    <tbody id="diaryTableBody">
+
+                    </tbody>    
+                </table>
+                <button id="openAddDiaryFormBtn">Write</button>
+            </div>
         </section>
     </main>
     <div class="formContainer off" id="addTaskContainer">
-                <button class="closeForm" id="closeForm">X</button>
-                <form class="form" id="addTaskForm">
-                    <input type="text" maxlength="20" id="toDoInput" name="toDoInput" placeholder="Task Name" required>
-                    <button type="submit" id="submitToDo">Add Task</button>
-                </form>
-            </div>
+        <button class="closeForm" id="closeTaskForm">X</button>
+        <form class="form" id="addTaskForm">
+            <input type="text" maxlength="20" id="toDoInput" name="toDoInput" placeholder="Task Name" required>
+            <button type="submit" id="submitToDo">Add Task</button>
+        </form>
+    </div>
     <div class="formContainer modifyTaskWindow off" id="modifyTaskWindow">
-            <button class="closeForm" id="closeModifyForm">X</button>
-            <form class="form" id="modifyTaskForm">
-                <input type="text" name="modifyTaskDesciption" id="modifyTaskDesciption">
-                <button type="submit" id="modifyTaskBtn">Modify</button>
-            </form>
-        </div>
+        <button class="closeForm" id="closeModifyForm">X</button>
+        <form class="form" id="modifyTaskForm">
+            <input type="text" name="modifyTaskDesciption" id="modifyTaskDesciption">
+            <button type="submit" id="modifyTaskBtn">Modify</button>
+        </form>
+    </div>
+    <div class="formContainer addDiaryPage off" id="addDiaryPageWindow">
+        <button class="closeForm" id="closeDiaryForm">X</button>
+        <form class="form addDiaryPageForm" id="addDiaryPageForm">
+            <input type="text" name="diaryPageTitle" id="diaryPageTitle" placeholder="Title..">
+            <textarea class="diaryPageText" id="diaryPageText" placeholder="write here.." rows="10"></textarea>
+            <button type="submit" id="addDiaryPageBtn">Add</button>
+        </form>
+    </div>
+    <div class="formContainer modifyDiaryPage off" id="modifyDiaryPageWindow">
+        <button class="closeForm" id="closeModifyDiaryForm">X</button>
+        <form class="form modifyDiaryPageForm" id="modifyDiaryPageForm">
+            <input type="text" name="diaryPageTitle" id="modifyPageTitle" >
+            <textarea class="diaryPageText" id="modifyPageText" rows="10"></textarea>
+            <button type="submit" id="modifyDiaryPageBtn">Modify</button>
+        </form>
+    </div>
     <footer class="">
         <div  class="navigation" id="navMenu">
             <ul>
                 <li id="dashboard"><a class="icon">🏠</a><a class="label">Dashboard</a></li>
                 <li id="tasks"><a class="icon">📋</a><a class="label">Tasks</a></li>
-                <li id="calendar"><a class="icon">🗓️</a><a class="label">Calendar</a></li>
+                <li id="news"><a class="icon">📰</a><a class="label">News</a></li>
                 <li id="meteo"><a class="icon">🌦️</a><a class="label">Meteo</a></li>
-                <li id="diary"><a class="icon">📝</a><a class="label">Diary</a></li>
+                <li id="diaryBtn"><a class="icon">📝</a><a class="label">Diary</a></li>
             </ul>
         </div>
     </footer>

@@ -178,6 +178,8 @@ main{
     width: 45vw;
     min-width: 300px;
     min-height: 32vh;
+    max-height: 300px;
+    overflow: hidden;
     border-radius: 10px;
     background-color: #6b4c7bde;
     border: 1px solid #6b4c7b;
@@ -203,14 +205,17 @@ main{
 .tasksPrev ul li{
     display: flex;
     flex-direction: row;
-    background-color: #e6cfff;
+    background-color: #7f708746;
     align-self: center;
     padding: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
     width: 90%;
-    border: 1px solid #6b4c7b;
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
     border-radius: 10px;
     align-items: space-between;
+    box-shadow: inset 0 0 5px rgba(135, 135, 135, 0.388), 0 0 3px 1px rgba(0, 0, 0, 0.347);
+    backdrop-filter: blur(3px);
 }
 
 
@@ -219,7 +224,7 @@ main{
     font-size: 1em;
     background-color: #6b4c7b;
     color: white;
-    border: none;
+    border: 1px solid whitesmoke;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -259,6 +264,38 @@ main{
     background-color: rgba(174, 7, 7, 0.52);
 }
 
+#diaryPrev{
+    display: flex;
+    flex-direction: column;
+    max-height: 210px;
+    overflow: hidden;
+}
+
+#diaryPrevHead{
+    display: flex;
+    padding: 10px 30px 10px 10px;
+    justify-content: space-between;
+
+    margin-top: 10px;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+}
+
+#diaryPrevHead :last-child{
+    display: none;
+}
+
+
+#diaryPrevTableBody > .dashPageItem{
+    margin-top: 10px;
+    max-height: 50px;
+}
+
+#diaryPrevTableBody > .dashPageItem > .delete{
+    display: none;
+}
+
 
 
 
@@ -291,12 +328,15 @@ main{
 }
 
 .pageCard ul li{
-    background-color: #e6cfff;
     margin: 10px auto;
     padding: 10px;
+    background-color: #7f708746;
     width: 90%;
-    border: 1px solid #6b4c7b;
+    border: 1px solid whitesmoke;
     border-radius: 10px;
+    color: whitesmoke;
+    box-shadow: inset 0 0 10px rgba(135, 135, 135, 0.388), 0 0 10px 3px rgba(0, 0, 0, 0.347);
+    backdrop-filter: blur(3px);
 }
 
 .pageCard ul li button{
@@ -308,9 +348,9 @@ main{
     margin: 20px auto 0 auto;
     padding: 10px;
     text-align: center;
-    background-color: #6b4c7b;
+    background-color: rgba(255, 255, 255, 0);
     color: white;
-    border: none;
+    border: 1px solid whitesmoke;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -360,6 +400,12 @@ main{
  #noTask{
     background-color: rgba(169, 20, 20, 0.289);
     color: #ddd4e1;
+    margin: 20px 20px 0px 20px;
+    font-size: 16px;
+    text-align: left;
+    border: 0.5px solid rgba(66, 65, 65, 0.567);
+    border-radius: 10px;
+
 }
 
 .formContainer{
@@ -381,7 +427,7 @@ main{
     backdrop-filter: blur(3px);
 }
 
-#closeForm{
+#closeTaskForm{
     align-self: flex-end;
     width: 30px;
     margin-top: 0px;
@@ -401,6 +447,7 @@ main{
     justify-content: center;
     align-self: center;
     margin-top: 10px;
+    height: 100%;
 }
 
 
@@ -421,6 +468,21 @@ main{
     
 }
 
+.form textarea{
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #6b4c7b;
+    color: #6b4c7b;
+    font-size: 16px;
+    box-shadow: 1px 1px 1px  rgba(81, 81, 81, 0.658);
+}
+
+.form textarea:focus{
+    outline: none;
+}
+
 .form button{
     margin-top: 0px;
     min-height: 4vh;
@@ -428,7 +490,6 @@ main{
     background-color: #6b4c7b;
     color: white;
     border: none;
-    border-radius: 0 5px 5px 0;
     padding: 10px;
     cursor: pointer;
     box-shadow: 1px 1px 1px  rgba(81, 81, 81, 0.658);
@@ -453,8 +514,11 @@ main{
     cursor: pointer;
 }
 
-#tasksView{
-    min-height: 65vh;
+
+
+#toDoList{
+    max-height: 500px;
+    overflow-y: scroll;
 }
 
 
@@ -539,7 +603,7 @@ main{
 }
 
 .meteoCard{
-    background-color: #d9b3e692;
+    background-color: #d9b3e635;
     margin-top: 25px;
     padding: 10px;
     flex-grow: 1;
@@ -592,6 +656,278 @@ main{
 }
 
 
+/* Diary specific style */
+
+#diaryView{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+ .addDiaryPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #94739fcf;
+    padding: 10px 10px 20px 10px;
+    min-width: 150px;
+    max-width: 700px;
+    width: 80%;
+    min-height: 40vh;
+    border: 1px solid #6b4c7b;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 15px rgba(135, 135, 135, 0.388), 0 0 18px 3px rgba(0, 0, 0, 0.347);
+    backdrop-filter: blur(3px);
+ }
+
+ #closeDiaryForm{
+    align-self: flex-end;
+    justify-self: flex-start;
+    width: 30px;
+    margin-top: 0px;
+    min-height: 1vh;
+    background-color: #6b4c7b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#addDiaryPageForm{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+}
+
+.addDiaryPageForm input{
+    align-self: flex-start;
+    min-height: 4vh;
+    width: 100%;
+    min-width: 80px;
+    max-width: 200px;
+    padding: 0px 0px 0px 10px;
+    margin: 0px;
+    border-radius: 5px;
+    border: 1px solid #6b4c7b;
+    color: #6b4c7b;
+    font-size: 16px;
+    box-shadow: 1px 1px 1px  rgba(81, 81, 81, 0.658);
+}
+
+.addDiaryPageForm input:focus{
+    outline: none;
+    
+}
+
+.addDiaryPageForm button{
+    margin-top: 0px;
+    min-height: 4vh;
+    max-width: 150px;
+    align-self: center;
+    border-radius: 5px;
+    background-color: #6b4c7b;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px  rgba(81, 81, 81, 0.658);
+}
+
+/* modify form style */
+
+.modifyDiaryPage{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #94739fcf;
+    padding: 10px 10px 20px 10px;
+    min-width: 150px;
+    max-width: 700px;
+    width: 80%;
+    min-height: 40vh;
+    border: 1px solid #6b4c7b;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 15px rgba(135, 135, 135, 0.388), 0 0 18px 3px rgba(0, 0, 0, 0.347);
+    backdrop-filter: blur(3px);
+ }
+
+ #closeModifyDiaryForm{
+    align-self: flex-end;
+    justify-self: flex-start;
+    width: 30px;
+    margin-top: 0px;
+    min-height: 1vh;
+    background-color: #6b4c7b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#modifyDiaryPageForm{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    flex-direction: column;
+}
+
+.modifyDiaryPageForm input{
+    align-self: flex-start;
+    min-height: 4vh;
+    width: 100%;
+    min-width: 80px;
+    max-width: 200px;
+    padding: 0px 0px 0px 10px;
+    margin: 0px;
+    border-radius: 5px;
+    border: 1px solid #6b4c7b;
+    color: #6b4c7b;
+    font-size: 16px;
+    box-shadow: 1px 1px 1px  rgba(81, 81, 81, 0.658);
+}
+
+.modifyDiaryPageForm input:focus{
+    outline: none;
+    
+}
+
+.modifyDiaryPageForm button{
+    margin-top: 0px;
+    min-height: 4vh;
+    max-width: 150px;
+    align-self: center;
+    border-radius: 5px;
+    background-color: #6b4c7b;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 1px 1px 1px  rgba(81, 81, 81, 0.658);
+}
+ /* end modify form style */
+
+
+.noPageAlert{
+    background-color: rgba(169, 20, 20, 0.289);
+    color: #ddd4e1;
+    margin: 20px 20px 0px 20px;
+    font-size: 16px;
+    border: 0.5px solid rgba(66, 65, 65, 0.567);
+    border-radius: 10px;
+}
+.noPageAlert > p{
+    margin: 0px;
+    padding: 20px 10px 20px 10px;
+    text-align: start;
+}
+
+#noPageAlert{
+    margin-bottom: 20em;
+}
+
+#diaryDisplay{
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+}
+
+#diaryTableHead{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 20px;
+    color: whitesmoke;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+}
+
+#diaryTableBody{
+    overflow-y: scroll;
+}
+.pageItem{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 10px;
+    gap: 60px;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+}
+
+.pageItem td{
+    align-self: center;
+    width: 120px;
+    max-height: 45px;
+    overflow-y: hidden;
+    word-break: break-word;
+}
+
+#delTd{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    justify-self: flex-end;
+}
+
+#delTd > button{
+    justify-self: center;
+    align-self: center;
+    margin: 0px 0px;
+    padding: 10px;
+}
+
+@media (max-height: 816px) {
+    #diaryDisplay{
+        display: flex;
+        flex-direction: column;
+        max-height: 350px;
+    }
+}
+
+@media (max-width: 620px) {
+    #pageHeadText{
+        display: none;
+    }
+    #pageText{
+        display: none;
+    }
+    #pageHeadDel{
+        display: none;
+    }
+    #delTd{
+        display: none;
+    }
+    .pageItem{
+    display: flex;
+    margin-bottom: 10px;
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    }
+    .pageItem td{
+    align-self: center;
+    width: 80px;
+    max-height: 45px;
+    overflow-y: hidden;
+    word-break: break-word;
+    }
+}
+
 /* Footer style */
 
 footer{
@@ -613,6 +949,15 @@ footer{
 
 
 /* General Style */
+
+#diaryDisplay.off{
+    display:none;
+}
+
+#diaryPrev.off{
+    display: none;
+}
+
 
 .off{
     display: none;
@@ -637,7 +982,8 @@ h2.pageTitle{
 h3{
     text-align: center;
     font-size: 30px;
-    margin-top: 140px;
+    margin-top: 100px;
+    padding: 0;
     color: rgb(174, 7, 7);
 }
 

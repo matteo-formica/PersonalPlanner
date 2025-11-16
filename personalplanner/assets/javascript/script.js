@@ -32,40 +32,42 @@ darkModeBtn.onclick = function() {
 // Navigation logic
 const dashboardBtn = document.getElementById('dashboard');
 const tasksBtn = document.getElementById('tasks');
-const calendarBtn = document.getElementById('calendar');
+const newsBtn = document.getElementById('news');
 const meteoBtn = document.getElementById('meteo');
-const diaryBtn = document.getElementById('diary');
+const diaryBtn = document.getElementById('diaryBtn');
 const dashboardPage = document.getElementById('dashboardPage');
 const tasksPage = document.getElementById('tasksPage');
-const calendarPage = document.getElementById('calendarPage');
+const newsPage = document.getElementById('newsPage');
 const meteoPage = document.getElementById('meteoPage');
 const diaryPage = document.getElementById('diaryPage');
 const appName = document.getElementById('appName');
 const weatherCard = document.getElementById('weatherCard');
 const tasksCard = document.getElementById('tasksCard');
+const diaryCard = document.getElementById('diaryCard');
 
 
 dashboardBtn.onclick = function() {
     dashboardPage.classList.remove('off');
     tasksPage.classList.add('off');
-    calendarPage.classList.add('off');
+    newsPage.classList.add('off');
     meteoPage.classList.add('off');
     diaryPage.classList.add('off');
     retrieveTasks();
     fetchData();
+    retrieveDiary();
 }
 
 tasksBtn.onclick = function() {
     tasksPage.classList.remove('off');
     dashboardPage.classList.add('off');
-    calendarPage.classList.add('off');
+    newsPage.classList.add('off');
     meteoPage.classList.add('off');
     diaryPage.classList.add('off');
     retrieveTasks();
 }
 
-calendarBtn.onclick = function() {
-    calendarPage.classList.remove('off');
+newsBtn.onclick = function() {
+    newsPage.classList.remove('off');
     dashboardPage.classList.add('off');
     tasksPage.classList.add('off');
     meteoPage.classList.add('off');
@@ -76,7 +78,7 @@ meteoBtn.onclick = function() {
     meteoPage.classList.remove('off');
     dashboardPage.classList.add('off');
     tasksPage.classList.add('off');
-    calendarPage.classList.add('off');
+    newsPage.classList.add('off');
     diaryPage.classList.add('off');
 }
 
@@ -84,19 +86,21 @@ diaryBtn.onclick = function() {
     diaryPage.classList.remove('off');
     dashboardPage.classList.add('off');
     tasksPage.classList.add('off');
-    calendarPage.classList.add('off');
+    newsPage.classList.add('off');
     meteoPage.classList.add('off');
+    retrieveDiary();
 }
 
 appName.onclick = function(){
     if(dashboardPage.classList.contains('off')){
         dashboardPage.classList.remove('off');
         tasksPage.classList.add('off');
-        calendarPage.classList.add('off');
+        newsPage.classList.add('off');
         meteoPage.classList.add('off');
         diaryPage.classList.add('off');
         retrieveTasks();
         fetchData();
+        retrieveDiary();
     }
 }
 
@@ -104,17 +108,26 @@ weatherCard.onclick = function(){
     meteoPage.classList.remove('off');
     dashboardPage.classList.add('off');
     tasksPage.classList.add('off');
-    calendarPage.classList.add('off');
+    newsPage.classList.add('off');
     diaryPage.classList.add('off');
 }
 
 tasksCard.onclick = function(){
     tasksPage.classList.remove('off');
     dashboardPage.classList.add('off');
-    calendarPage.classList.add('off');
+    newsPage.classList.add('off');
     meteoPage.classList.add('off');
     diaryPage.classList.add('off');
     retrieveTasks();
+}
+
+diaryCard.onclick = function(){
+    diaryPage.classList.remove('off');
+    dashboardPage.classList.add('off');
+    tasksPage.classList.add('off');
+    newsPage.classList.add('off');
+    meteoPage.classList.add('off');
+    retrieveDiary();
 }
 
 // End of navigation logic
@@ -323,7 +336,7 @@ const formContainer = document.getElementById('addTaskContainer');
 const taskForm = document.getElementById('addTaskForm');
 const taskFormOpenBtn = document.getElementById('taskFormOpenBtn');
 const tasksView = document.getElementById('tasksView');
-const closeFormBtn = document.getElementById('closeForm');
+const closeTaskFormBtn = document.getElementById('closeTaskForm');
 const toDoInput = document.getElementById('toDoInput');
 const taskFormBtn = taskForm.lastChild;
 
@@ -334,7 +347,7 @@ const formToggle = function() {
 
 
 taskFormOpenBtn.onclick = formToggle;
-closeFormBtn.onclick = formToggle;
+closeTaskFormBtn.onclick = formToggle;
 
 taskForm.addEventListener('submit', function(event){
     event.preventDefault();
@@ -345,6 +358,228 @@ taskForm.addEventListener('submit', function(event){
 
 
 // Tasks logic end
+
+
+
+// Diary logic
+
+
+// Diary form logic
+
+
+
+const diaryFormContainer = document.getElementById('addDiaryPageWindow');
+const diaryForm = document.getElementById('addDiaryPageForm');
+const diaryFormOpenBtn = document.getElementById('openAddDiaryFormBtn');
+const diaryView = document.getElementById('diaryView');
+const diaryPrevTableBody = document.getElementById('diaryPrevTableBody');
+const diaryTableBody = document.getElementById('diaryTableBody');
+const closeDiaryFormBtn = document.getElementById('closeDiaryForm');
+const diaryPageTitle = document.getElementById('diaryPageTitle');
+const diaryPageText = document.getElementById('diaryPageText');
+const diaryFormBtn = diaryForm.lastChild;
+const noPageAlert = document.getElementById('noPageAlert');
+const noPageDashAlert = document.getElementById('noPageDashAlert');
+const diaryDisplay = document.getElementById('diaryDisplay');
+const diaryPrev = document.getElementById('diaryPrev');
+
+const diaryFormToggle = function() {
+    diaryFormContainer.classList.toggle('off');
+    main.classList.toggle('blur');
+};
+
+
+diaryFormOpenBtn.onclick = diaryFormToggle;
+closeDiaryFormBtn.onclick = diaryFormToggle;
+
+async function addDiaryPage(title, text, inputDate){
+    try{
+        const response = await fetch('http://localhost:3000/diary', {method : "POST",
+            headers : { 
+                "Content-Type" : "application/json",                 
+            },
+            body : JSON.stringify({
+                "title" : title,
+                "text" : text,  
+                "date" : inputDate                       
+            })
+        })
+        if(response.ok){
+            await retrieveDiary();
+        }
+        }
+    catch(error){
+        console.log(error);
+    }
+    
+};
+
+async function delPage(id){
+    try{
+        const response = await fetch('http://localhost:3000/diary/' + id, {method : "DELETE", 
+            headers: { 
+                "Content-Type" : "application/json",         
+            },
+            
+        });
+        if(response.ok){
+            await retrieveDiary();
+        }
+    }
+    catch(error){
+        console.log(error);
+    }
+};
+
+
+// modify diary page logic
+
+async function modifyPage(id, newTitle, newText ,date){
+    try{
+        const response = await fetch('http://localhost:3000/diary/' + id, {method : "PUT",
+            headers : { 
+                "Content-Type" : "application/json",               
+            },
+            body : JSON.stringify({
+                "id" : id,
+                "title" : newTitle,
+                "text" : newText,
+                "date": date
+            })
+        })
+        if(response.ok){
+            await retrieveDiary();
+        }
+        }
+    catch(error){
+        console.log(error);
+    }
+};
+
+const modifyDiaryPageForm = document.getElementById('modifyDiaryPageForm');
+const modifyPageTitle = document.getElementById('modifyPageTitle');
+const modifyPageText = document.getElementById('modifyPageText');
+const modifyDiaryPageBtn = document.getElementById('modifyDiaryPageBtn');
+const modifyDiaryPageWindow = document.getElementById('modifyDiaryPageWindow');
+const closeModifyDiaryForm = document.getElementById('closeModifyDiaryForm');
+
+// simple closing modify form
+closeModifyDiaryForm.addEventListener('click', function(){
+    main.classList.toggle('blur');
+    modifyDiaryPageWindow.classList.toggle('off');
+});
+
+// preparing new description/title for Page and fire post fetch
+const actModifyPage = function(id, title, text, date){
+    modifyPageTitle.value = title;
+    modifyPageText.value = text;
+    modifyDiaryPageForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        const newPageTitle = modifyPageTitle.value;
+        const newPageText = modifyPageText.value;
+        modifyPage(id, newPageTitle, newPageText, date);
+        modifyDiaryPageWindow.classList.add('off');
+        main.classList.remove('blur');
+    })
+
+}
+
+//add page form event listener
+diaryForm.addEventListener('submit', function(event){
+    event.preventDefault();
+    const inputDate = new Date().toLocaleDateString("en-US");
+    diaryFormToggle();
+    addDiaryPage(diaryPageTitle.value, diaryPageText.value, inputDate);
+    diaryPageTitle.value= "";
+    diaryPageText.value= "";
+});
+
+
+
+
+
+async function retrieveDiary(){
+    noPageDashAlert.innerHTML="";
+    noPageAlert.innerHTML="";
+    try{
+        const response = await fetch('http://localhost:3000/diary', {
+        headers: {
+        "Content-Type" : "application/json",
+        }
+        });
+        const diary = await response.json();
+        if(response.ok && diary.length > 0){
+            diaryDisplay.classList.remove('off');
+            diaryPrev.classList.remove('off');
+            diaryPrevTableBody.innerHTML="";
+            diaryTableBody.innerHTML="";
+            noPageDashAlert.classList.add('off');
+            noPageAlert.classList.add('off');
+            diary.forEach(page => {
+                const pageItem = document.createElement('TR');
+                pageItem.innerHTML = `<td class="pageTitle">${page.title}</td><td id="pageText" class="pageText">${page.text}</td><td class="pageDate">${page.date}<td class="delete" id="delTd"><button id="delPageBtn" class="delPageBtn">❌</button></td>`;
+                pageItem.classList.add('pageItem');
+                console.log(pageItem);
+                const delPageBtn = pageItem.lastChild;
+
+                pageItem.addEventListener('click', function(e){
+                    modifyDiaryPageWindow.classList.toggle('off');
+                    main.classList.toggle('blur');
+                    actModifyPage(page.id, page.title, page.text, page.date);
+                    e.stopPropagation()
+                })
+
+                delPageBtn.addEventListener('click', function(e){
+                    pageItem.innerHTML = "";
+                    delPage(page.id);
+                    e.stopPropagation();
+                
+                });
+
+                console.log(diaryPrevTableBody);
+                console.log(diaryTableBody);
+                if(diaryPage.classList.contains('off')){
+                    pageItem.classList.add('dashPageItem')
+                    diaryPrevTableBody.appendChild(pageItem);
+                }else{
+                    diaryTableBody.prepend(pageItem);
+                };
+                
+            });   
+        }else{
+            diaryDisplay.classList.add('off');
+            diaryPrev.classList.add('off');
+            const pageItem = document.createElement('P');
+            pageItem.innerText = "No Page Available. Write Pages to display here";
+            pageItem.setAttribute('id', 'noPage');  
+            pageItem.style.fontSize = "0.8em" ;
+            pageItem.style.color = "white" 
+            if(diaryPage.classList.contains('off')){
+                    noPageDashAlert.classList.remove('off');
+                    noPageDashAlert.appendChild(pageItem);
+                }else{
+                    noPageAlert.classList.remove('off');
+                    noPageAlert.appendChild(pageItem);
+                };
+        }
+    }    
+    catch(error){
+        console.log(error);
+    };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // MeteoPage Logic
 
@@ -439,6 +674,11 @@ const fetchData = async function () {
                     dashboardMeteoIcon.src = 'assets/meteoIcon/rain.png'
                     meteoIcon.classList.remove('off');
                 }
+                else if(meteoData.currentConditions.icon === "fog"){                   
+                    meteoIcon.src = 'assets/meteoIcon/fog.png';
+                    dashboardMeteoIcon.src = 'assets/meteoIcon/fog.png'
+                    meteoIcon.classList.remove('off');
+                }
                 else{
                     meteoIcon.alt = "No icon found"
                 };
@@ -524,4 +764,5 @@ meteoSearch.addEventListener('submit', function(e){
 window.onload = function(){
     retrieveTasks();
     fetchData();
+    retrieveDiary()
 };
