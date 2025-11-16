@@ -338,7 +338,7 @@ const fetchData = async function () {
                 else{
                     meteoIcon.alt = "No icon found"
                 };
-                
+
                 // set current temperature 
                 dashCurrentTemp.innerText= `${meteoData.days[0].temp} F°`;
                 currentTemp.innerText= `${meteoData.days[0].temp} F°`;
