@@ -242,6 +242,17 @@ main{
     margin-top: 10px;
 }
 
+#dashMeteoAlerts{
+     text-align: center;
+    margin: auto;
+    margin-top: 10px;
+    color: whitesmoke;
+    border: 1px solid rgb(174, 7, 7);
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgba(174, 7, 7, 0.52);
+}
+
 
 
 
@@ -472,6 +483,17 @@ main{
     font-size: 18px;
     color: #ddd4e1;
     margin-top: 10px;
+}
+
+#meteoAlerts{
+    text-align: center;
+    margin: auto;
+    margin-top: 10px;
+    color: whitesmoke;
+    border: 1px solid rgb(174, 7, 7);
+    border-radius: 5px;
+    padding: 10px;
+    background-color: rgba(174, 7, 7, 0.52);
 }
 
 

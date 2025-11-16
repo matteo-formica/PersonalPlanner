@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/styles.css" id="themeLink">
+    <link rel="stylesheet" href="./assets/css/styles.css" id="themeLink">
     <title>Personal Planner</title>
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
 </head>
 <body>
     <header>
@@ -29,6 +29,7 @@
                         <img src="" alt="meteoIcon" id="dashboardMeteoIcon">
                         <h5 id="dashCurrentTemp"></h5>
                     </div>
+                    <h4 class="off" id="dashMeteoAlerts"></h4>
                     </div>
             <div class="dashboardCard tasksPrev" id="tasksCard">
                 <h5>Tasks</h5>
@@ -79,6 +80,7 @@
                     <img class="off" src="" alt="meteoIcon" id="nowIcon">
                     <h5 id="currentTemp"></h5>
                 </div>
+                <h4 class="off" id="meteoAlerts"></h4>
                 <div class="meteoCards">
                     <div class="meteoCard" id="todayMeteo">
                         <h5>Today</h5>
@@ -89,11 +91,6 @@
                     <div class="meteoCard" id="tomorrowMeteo">
                         <h5>Tomorrow</h5>
                         <ul id="tomorrowMeteoData">
-
-                        </ul>
-                    </div>
-                    <div class="meteoCard" id="airQuality">
-                        <ul id="airMeteoData">
 
                         </ul>
                     </div>
@@ -121,6 +118,6 @@
         </div>
     </footer>
 
-    <script src="/assets/javascript/script.js"></script>
+    <script src="./assets/javascript/script.js"></script>
 </body>
 </html>

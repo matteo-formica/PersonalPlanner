@@ -161,7 +161,6 @@ async function retrieveTasks(){
             toDoListPrev.innerHTML = "";
             toDoList.innerHTML = "";
             tasks.forEach(task => {
-                console.log(task.id);
                 const taskItem = document.createElement('LI');
                 taskItem.innerHTML = "<button class='taskDoneBtn'></button>" + task.description + "<button class='taskDelBtn offBtn'>❌</button></li>";
                 taskItem.classList.add('taskItem');
@@ -264,6 +263,8 @@ const fetchingBanner = document.getElementById('fetchingBanner');
 const dashboardMeteoIcon = document.getElementById('dashboardMeteoIcon');
 const currentTemp = document.getElementById('currentTemp');
 const dashCurrentTemp = document.getElementById('dashCurrentTemp');
+const dashMeteoAlerts = document.getElementById('dashMeteoAlerts');
+const meteoAlerts = document.getElementById('meteoAlerts');
 
 //Fetch meteo data   
 const fetchData = async function () {
@@ -342,6 +343,14 @@ const fetchData = async function () {
                 // set current temperature 
                 dashCurrentTemp.innerText= `${meteoData.days[0].temp} F°`;
                 currentTemp.innerText= `${meteoData.days[0].temp} F°`;
+
+                // set meteo Alerts
+                if(meteoData.alerts.length !== 0){
+                    dashMeteoAlerts.classList.remove('off');
+                    meteoAlerts.classList.remove('off');
+                    dashMeteoAlerts.innerHTML= `${meteoData.alerts[0].event}`;
+                    meteoAlerts.innerHTML= `${meteoData.alerts[0].event}`;
+                }
 
                 // add data on today card
                 const todayMeteo = document.createElement('UL');
