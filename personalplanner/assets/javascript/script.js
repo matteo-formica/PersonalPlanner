@@ -132,7 +132,7 @@ async function checkTask(id, description, completed){
     }
 };
 
-// modify a task logic(work in progress)
+// modify a task logic
 
 async function modifyTask(id, newdescription, completed){
     try{
@@ -147,6 +147,7 @@ async function modifyTask(id, newdescription, completed){
             })
         })
         if(response.ok){
+
             await retrieveTasks();
         }
         }
@@ -155,16 +156,29 @@ async function modifyTask(id, newdescription, completed){
     }
 };
 
-const modifyTaskDesciption = document.getElementById('newTaskDesciption');
+const modifyTaskForm = document.getElementById('modifyTaskForm');
+const modifyTaskDesciption = document.getElementById('modifyTaskDesciption');
 const modifyTaskBtn = document.getElementById('modifyTaskBtn');
 const modifyTaskWindow = document.getElementById('modifyTaskWindow');
 const modifyFormCloseBtn = document.getElementById('closeModifyForm');
 const main = document.getElementById('main');
+
+// simple closing modify form
 modifyFormCloseBtn.addEventListener('click', function(){
     main.classList.toggle('blur');
     modifyTaskWindow.classList.toggle('off');
 });
+
+// preparing new description for task and fire post fetch
 const actModifyTask = function(id, description, completed){
+    modifyTaskDesciption.value = description;
+    modifyTaskForm.addEventListener('submit', function(e){
+        e.preventDefault();
+        newTaskDescription = modifyTaskDesciption.value;
+        modifyTask(id, newTaskDescription, completed);
+        modifyTaskWindow.classList.add('off');
+        main.classList.remove('blur');
+    })
 
 }
 
@@ -228,6 +242,7 @@ async function retrieveTasks(){
                 taskItem.addEventListener('click', function(e){
                     modifyTaskWindow.classList.toggle('off');
                     main.classList.toggle('blur');
+                    actModifyTask(task.id, task.description, task.completed);
                     e.stopPropagation()
                 })
 
