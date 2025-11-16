@@ -248,7 +248,7 @@ main{
     margin-top: 10px;
 }
 
-#dashMeteoAlerts{
+.dashMeteoAlerts{
      text-align: center;
     margin: auto;
     margin-top: 10px;
@@ -362,20 +362,23 @@ main{
     color: #ddd4e1;
 }
 
-.addTaskContainer{
+.formContainer{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: auto;
-    background-color: #d9b3e6;
-    margin-top: 15vh;
-    padding: 5px 5px 20px 5px;
+    background-color: #94739fcf;
+    padding: 20px 20px 30px 20px;
     min-width: 150px;
     max-width: 400px;
     min-height: 10vh;
     border: 1px solid #6b4c7b;
     border-radius: 10px;
-    
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: inset 0 0 15px rgba(135, 135, 135, 0.388), 0 0 18px 3px rgba(0, 0, 0, 0.347);
+    backdrop-filter: blur(3px);
 }
 
 #closeForm{
@@ -392,17 +395,16 @@ main{
 }
 
 
-#addTaskForm{
+.form{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-self: center;
     margin-top: 10px;
-    box-shadow: 1px 1px 1px  rgba(81, 81, 81, 0.658);
 }
 
 
-#addTaskForm input{
+.form input{
     min-height: 4vh;
     min-width: 100px;
     padding: 0px 0px 0px 10px;
@@ -411,14 +413,15 @@ main{
     border: 1px solid #6b4c7b;
     color: #6b4c7b;
     font-size: 16px;
+    box-shadow: 1px 1px 1px  rgba(81, 81, 81, 0.658);
 }
 
-#addTaskForm input:focus{
+.form input:focus{
     outline: none;
     
 }
 
-#addTaskForm button{
+.form button{
     margin-top: 0px;
     min-height: 4vh;
     border-radius: 0px 5px 5px 0;
@@ -428,15 +431,33 @@ main{
     border-radius: 0 5px 5px 0;
     padding: 10px;
     cursor: pointer;
+    box-shadow: 1px 1px 1px  rgba(81, 81, 81, 0.658);
 }
 
-#addTaskForm button:hover{
+.form button:hover{
     background-color: #583f64;
+}
+
+
+
+#closeModifyForm{
+    align-self: flex-end;
+    width: 30px;
+    margin-top: 0px;
+    min-height: 1vh;
+    background-color: #6b4c7b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
 }
 
 #tasksView{
     min-height: 65vh;
 }
+
+
 
 
 /* Meteo Page specific Style*/
@@ -495,7 +516,7 @@ main{
     margin-top: 10px;
 }
 
-#meteoAlerts{
+.meteoAlerts{
     text-align: center;
     margin: auto;
     margin-top: 10px;
@@ -605,9 +626,7 @@ footer{
 
 
 .blur{
-    opacity: 40%;
-    position: absolute;
-    left: 5%;
+    opacity: 60%;
     z-index: -1;
 }
 

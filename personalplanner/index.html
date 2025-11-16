@@ -18,7 +18,7 @@
             <button class="themeSelectorBtn" id="darkModeBtn">🌕</button>
         </div>
     </header>
-    <main>
+    <main id="main">
         <section class="appPage" id="dashboardPage">
             <h2 class="pageTitle">Dashboard</h2>
             <div class="dashboardCards">
@@ -29,7 +29,7 @@
                         <img src="" alt="meteoIcon" id="dashboardMeteoIcon">
                         <h5 id="dashCurrentTemp"></h5>
                     </div>
-                    <h4 class="off" id="dashMeteoAlerts"></h4>
+                    <h4 class=" dashMeteoAlerts off" id="dashMeteoAlerts"></h4>
                     </div>
             <div class="dashboardCard tasksPrev" id="tasksCard">
                 <h5>Tasks</h5>
@@ -55,13 +55,6 @@
                 </ul>
                 <button id="taskFormOpenBtn">Add</button>
             </div>
-            <div class="addTaskContainer off" id="addTaskContainer">
-                <button id="closeForm">X</button>
-                <form id="addTaskForm">
-                    <input type="text" maxlength="20" id="toDoInput" name="toDoInput" placeholder="Task Name" required>
-                    <button type="submit" id="submitToDo">Add Task</button>
-                </form>
-            </div>
         </section>
         <section class="appPage off" id="calendarPage">
             <h2 class="pageTitle">Calendar</h2>
@@ -80,7 +73,7 @@
                     <img class="off" src="" alt="meteoIcon" id="nowIcon">
                     <h5 id="currentTemp"></h5>
                 </div>
-                <h4 class="off" id="meteoAlerts"></h4>
+                <h4 class="meteoAlerts off" id="meteoAlerts"></h4>
                 <div class="meteoCards">
                     <div class="meteoCard" id="todayMeteo">
                         <h5>Today</h5>
@@ -106,6 +99,20 @@
             <h3>Coming Soon</h3>
         </section>
     </main>
+    <div class="formContainer off" id="addTaskContainer">
+                <button class="closeForm" id="closeForm">X</button>
+                <form class="form" id="addTaskForm">
+                    <input type="text" maxlength="20" id="toDoInput" name="toDoInput" placeholder="Task Name" required>
+                    <button type="submit" id="submitToDo">Add Task</button>
+                </form>
+            </div>
+    <div class="formContainer modifyTaskWindow off" id="modifyTaskWindow">
+            <button class="closeForm" id="closeModifyForm">X</button>
+            <form class="form" id="modifyTaskForm">
+                <input type="text" name="modifyTaskDesciption" id="modifyTaskDesciption">
+                <button type="submit" id="modifyTaskBtn">Modify</button>
+            </form>
+        </div>
     <footer class="">
         <div  class="navigation" id="navMenu">
             <ul>

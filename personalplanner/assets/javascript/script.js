@@ -132,6 +132,42 @@ async function checkTask(id, description, completed){
     }
 };
 
+// modify a task logic(work in progress)
+
+async function modifyTask(id, newdescription, completed){
+    try{
+        const response = await fetch('http://localhost:3000/todos/' + id, {method : "PUT",
+            headers : { 
+                "Content-Type" : "application/json",               
+            },
+            body : JSON.stringify({
+                "id" : id,
+                "description" : newdescription,
+                "completed" : completed
+            })
+        })
+        if(response.ok){
+            await retrieveTasks();
+        }
+        }
+    catch(error){
+        console.log(error);
+    }
+};
+
+const modifyTaskDesciption = document.getElementById('newTaskDesciption');
+const modifyTaskBtn = document.getElementById('modifyTaskBtn');
+const modifyTaskWindow = document.getElementById('modifyTaskWindow');
+const modifyFormCloseBtn = document.getElementById('closeModifyForm');
+const main = document.getElementById('main');
+modifyFormCloseBtn.addEventListener('click', function(){
+    main.classList.toggle('blur');
+    modifyTaskWindow.classList.toggle('off');
+});
+const actModifyTask = function(id, description, completed){
+
+}
+
 
 // Delete a task with a click on delete button
 async function delTask(id){
@@ -189,13 +225,21 @@ async function retrieveTasks(){
                     delBtn.classList.add('offBtn');
                 });
 
-                checkBtn.addEventListener('click', function(){
+                taskItem.addEventListener('click', function(e){
+                    modifyTaskWindow.classList.toggle('off');
+                    main.classList.toggle('blur');
+                    e.stopPropagation()
+                })
+
+                checkBtn.addEventListener('click', function(e){
+                    e.stopPropagation();
                     checkTask(task.id, task.description, task.completed);
                 });
 
-                delBtn.addEventListener('click', function(){
+                delBtn.addEventListener('click', function(e){
                     taskItem.innerHTML = "";
                     delTask(task.id);
+                    e.stopPropagation();
                 
                 });
 
@@ -234,11 +278,11 @@ const taskFormOpenBtn = document.getElementById('taskFormOpenBtn');
 const tasksView = document.getElementById('tasksView');
 const closeFormBtn = document.getElementById('closeForm');
 const toDoInput = document.getElementById('toDoInput');
+const taskFormBtn = taskForm.lastChild;
 
 const formToggle = function() {
     formContainer.classList.toggle('off');
-    tasksView.classList.toggle('blur');
-    taskFormOpenBtn.classList.toggle('off');
+    main.classList.toggle('blur');
 };
 
 
@@ -248,10 +292,10 @@ closeFormBtn.onclick = formToggle;
 taskForm.addEventListener('submit', function(event){
     event.preventDefault();
     formToggle();
-    console.log(toDoInput.value);
     addTask(toDoInput.value);
     toDoInput.value= "";
 });
+
 
 // Tasks logic end
 
@@ -278,7 +322,8 @@ const meteoAlerts = document.getElementById('meteoAlerts');
 
 //Fetch meteo data   
 const fetchData = async function () {
-        
+        meteoAlerts.innerHTML= "";
+        meteoAlerts.classList.add('off');
         const startDate = new Date().toISOString().split('T')[0];
         const endDate = new Date();
         endDate.setDate(endDate.getDate() + 5);
@@ -356,6 +401,7 @@ const fetchData = async function () {
 
                 // set meteo Alerts
                 if(meteoData.alerts.length !== 0){
+                    console.log(meteoData.alerts.length);
                     dashMeteoAlerts.classList.remove('off');
                     meteoAlerts.classList.remove('off');
                     dashMeteoAlerts.innerHTML= `${meteoData.alerts[0].event}`;
