@@ -5,15 +5,18 @@
 const lightModeBtn = document.getElementById('lightModeBtn');
 const darkModeBtn = document.getElementById('darkModeBtn');
 const themeLink = document.getElementById('themeLink');
+const bodyBack= document.getElementById('body');
 
 lightModeBtn.onclick = function() {
-    themeLink.href = '/assets/css/styles.css';
+    bodyBack.classList.add('light');
+    bodyBack.classList.remove('dark');
     lightModeBtn.classList.add('on');
     darkModeBtn.classList.remove('on');
 }
 
 darkModeBtn.onclick = function() {
-    themeLink.href = '/assets/css/darkStyles.css';
+    bodyBack.classList.remove('light');
+    bodyBack.classList.add('dark');
     lightModeBtn.classList.remove('on');
     darkModeBtn.classList.add('on');
 }
