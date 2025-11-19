@@ -688,8 +688,14 @@ const fetchData = async function () {
                     dashboardMeteoIcon.src = 'assets/meteoIcon/fog.png'
                     meteoIcon.classList.remove('off');
                 }
+                else if(meteoData.currentConditions.icon === "clear-day"){
+                    meteoIcon.src = 'assets/meteoIcon/sunny.png';
+                    dashboardMeteoIcon.src = 'assets/meteoIcon/sunny.png'
+                    meteoIcon.classList.remove('off');
+                }
                 else{
                     meteoIcon.alt = "No icon found"
+                    dashboardMeteoIcon.alt = "No icon found"
                 };
 
                 // set current temperature 
