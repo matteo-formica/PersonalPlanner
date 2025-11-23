@@ -4,7 +4,6 @@
 
 const lightModeBtn = document.getElementById('lightModeBtn');
 const darkModeBtn = document.getElementById('darkModeBtn');
-const themeLink = document.getElementById('themeLink');
 const bodyBack= document.getElementById('body');
 const pageTitle = document.querySelectorAll('.pageTitle');
 
@@ -44,6 +43,7 @@ const appName = document.getElementById('appName');
 const weatherCard = document.getElementById('weatherCard');
 const tasksCard = document.getElementById('tasksCard');
 const diaryCard = document.getElementById('diaryCard');
+const newsCard = document.getElementById('newsCard');
 
 
 dashboardBtn.onclick = function() {
@@ -72,6 +72,7 @@ newsBtn.onclick = function() {
     tasksPage.classList.add('off');
     meteoPage.classList.add('off');
     diaryPage.classList.add('off');
+    fetchNews();
 }
 
 meteoBtn.onclick = function() {
@@ -101,6 +102,7 @@ appName.onclick = function(){
         retrieveTasks();
         fetchData();
         retrieveDiary();
+        fetchNews();
     }
 }
 
@@ -128,6 +130,14 @@ diaryCard.onclick = function(){
     newsPage.classList.add('off');
     meteoPage.classList.add('off');
     retrieveDiary();
+}
+newsCard.onclick = function(){
+    diaryPage.classList.add('off');
+    dashboardPage.classList.add('off');
+    tasksPage.classList.add('off');
+    newsPage.classList.remove('off');
+    meteoPage.classList.add('off');
+    fetchNews();
 }
 
 // End of navigation logic
@@ -577,15 +587,61 @@ async function retrieveDiary(){
     };
 };
 
+// News logic
 
+const newsSearch = document.getElementById('newsSearch');
+const sourceName = document.getElementById('sourceName');
+const newsSearchBtn = document.getElementById('newsSearchBtn');
+const newsCards = document.querySelectorAll('.newsCard');
+const breakingNewsData = document.getElementById('breakingNewsData');
+const dashNewsData = document.getElementById('dashNewsData');
 
+const fetchNews = async function () {
+    let searchedSource = "";
+    if(dashboardPage.classList.contains('off')){
+            searchedSource = sourceName.value;
+            console.log(searchedSource)
+        }
+    else{
+            searchedSource = "us";
+    };
+    
+    try{
+            if(searchedSource !== ""){
+            const response = await fetch(`https://newsapi.org/v2/top-headlines?country=${searchedSource}&apiKey=cda6284be34e454a8d6b92a9ae5cb01f`);
+            const newsData = await response.json();
+            console.log(newsData);
+                if(response.ok && newsData.articles.length != 0){
+                    newsData.articles.forEach(article => {
+                        const articleItem = document.createElement('LI');
+                        const articleItem2 = document.createElement('LI');
+                        articleItem.innerHTML = `<img src="${article.urlToImage}" class="articleImage"><div class="articleinfo"><p class="title">${article.title}</p><p class="publishedAt">Published on: ${new Date(article.publishedAt).toLocaleDateString("en-US")}</p><a href="${article.url}" target="_blank">Leggi l'articolo completo</a></div>`;
+                        articleItem2.innerHTML = `<img src="${article.urlToImage}" class="articleImage"><div class="articleinfo"><p class="title">${article.title}</p><p class="publishedAt">Published on: ${new Date(article.publishedAt).toLocaleDateString("en-US")}</p><a href="${article.url}" target="_blank">Leggi l'articolo completo</a></div>`;
+                            breakingNewsData.appendChild(articleItem);
+                            dashNewsData.appendChild(articleItem2);
+                    })
+                }
+                else{
+                    const articleItem = document.createElement('LI');
+                    articleItem.innerText = "No News Found";
+                    articleItem.classList.add('noNews')
+                    breakingNewsData.appendChild(articleItem);
+                }
+                    }
+            else{
+            throw new Error("No news");
+        };
+    }
+        catch(error){
+            console.log(error);
+        };
+    };
 
-
-
-
-
-
-
+newsSearch.addEventListener('submit', function(e){
+    e.preventDefault();
+    fetchNews()
+    sourceName.value = '';
+    });      
 
 
 
@@ -601,8 +657,6 @@ const meteoIcon = document.getElementById('nowIcon');
 const meteoCards = document.querySelectorAll('.meteoCard');
 const todayMeteoData = document.getElementById('todayMeteoData');
 const tomorrowMeteoData = document.getElementById('tomorrowMeteoData')
-const rainMeteoData = document.getElementById('rainMeteoData');
-const airMeteoData = document.getElementById('airMeteoData');
 const fetchingMeteoAlert = document.getElementById('fetchingMeteo');
 const fetchingBanner = document.getElementById('fetchingBanner');
 const dashboardMeteoIcon = document.getElementById('dashboardMeteoIcon');
@@ -780,4 +834,5 @@ window.onload = function(){
     retrieveTasks();
     fetchData();
     retrieveDiary()
+    fetchNews()
 };

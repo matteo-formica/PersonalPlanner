@@ -37,9 +37,14 @@
                     
                 </ul>               
             </div>
-            <div class="dashboardCard" id="calendarCard">
+            <div class="dashboardCard" id="newsCard">
                 <h5>News</h5>
-                <h3>Coming Soon</h3></div>
+                <div id="dashNewsCard">
+                        <ul id="dashNewsData">
+
+                        </ul>
+                </div>
+            </div>
             <div class="dashboardCard" id="diaryCard">
                 <h5>Diary(Latest)</h5>
                 <div class="noPageAlert off" id="noPageDashAlert"></div>
@@ -57,7 +62,6 @@
                     </tbody>    
                 </table>
             </div>    
-            </div>
         </section>
         <section class="appPage off" id="tasksPage">
             <h2 class="pageTitle">Tasks</h2>
@@ -70,8 +74,18 @@
         </section>
         <section class="appPage off" id="newsPage">
             <h2 class="pageTitle">News</h2>
-            <p>View latest news here.</p>
-            <h3>Coming Soon</h3>
+            <div class="pageCard" id="newsView">
+                <form action="submit" id="newsSearch">
+                    <input type="text" id="sourceName" placeholder="Source name">
+                    <button id="newsSearchBtn">Search</button>
+                </form>
+                <h5>Breaking news</h5>
+                <div class="newsCard">
+                        <ul id="breakingNewsData">
+
+                        </ul>
+                </div>
+            </div>
         </section>
         <section class="appPage off" id="meteoPage">
             <h2 class="pageTitle">Meteo</h2>
@@ -129,7 +143,7 @@
     <div class="formContainer off" id="addTaskContainer">
         <button class="closeForm" id="closeTaskForm">X</button>
         <form class="form" id="addTaskForm">
-            <input type="text" maxlength="20" id="toDoInput" name="toDoInput" placeholder="Task Name" required>
+            <input type="text" maxlength="30" id="toDoInput" name="toDoInput" placeholder="Task Name" required>
             <button type="submit" id="submitToDo">Add Task</button>
         </form>
     </div>
